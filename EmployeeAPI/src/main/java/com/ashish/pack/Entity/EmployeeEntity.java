@@ -14,7 +14,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "EMPLOYEE")
 public class EmployeeEntity {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generateValue")
+  //  @SequenceGenerator(name = "generateValue",sequenceName = "seq",allocationSize = 1)
     @Column(name = "id")
     private int employeeId;
     private String name;

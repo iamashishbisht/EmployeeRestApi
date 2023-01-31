@@ -36,7 +36,10 @@ public class EmployeeService {
 
         log.info("employeeEntity->"+employeeEntity);
 
-        EmployeeEntity savedEmployee = employeeRepository.save(employeeEntity);
+/*        save() is causing issue for sequence generation as data was not getting flushed*/
+        //EmployeeEntity savedEmployee = employeeRepository.save(employeeEntity);
+        EmployeeEntity savedEmployee = employeeRepository.saveAndFlush(employeeEntity);
+
         return savedEmployee;
     }
 

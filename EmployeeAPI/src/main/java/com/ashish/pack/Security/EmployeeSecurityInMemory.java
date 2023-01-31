@@ -1,3 +1,4 @@
+/*
 package com.ashish.pack.Security;
 
 import org.springframework.context.annotation.Bean;
@@ -15,12 +16,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
-public class EmployeeSecurity{
-
+public class EmployeeSecurityInMemory {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public UserDetailsService userDetailsService(BCryptPasswordEncoder bCryptPasswordEncoder){
         InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
@@ -73,3 +74,4 @@ public class EmployeeSecurity{
     }
 
 }
+*/

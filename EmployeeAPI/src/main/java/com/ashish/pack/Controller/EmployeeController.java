@@ -3,8 +3,10 @@ package com.ashish.pack.Controller;
 import com.ashish.pack.Entity.Users;
 import com.ashish.pack.Exception.EmployeeNotFoundException;
 import com.ashish.pack.Entity.EmployeeEntity;
+import com.ashish.pack.Model.AuthRequest;
 import com.ashish.pack.Model.Employee;
 import com.ashish.pack.Service.EmployeeService;
+import com.ashish.pack.Service.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +31,15 @@ public class EmployeeController {
 
     @Value("${spring.messages}")
     String message;
+
+    @Autowired
+    JwtService jwtService;
+
+    //This method validates the username & password and then generates the token and return it back
+    @PostMapping("/authenticate")
+    public String generateToken(@RequestBody AuthRequest authRequest){
+        return jwtService.generateToken(authRequest.getUserName());
+    }
 
     @GetMapping(path = "/employee/{id}")
     @ResponseStatus(value = HttpStatus.OK)

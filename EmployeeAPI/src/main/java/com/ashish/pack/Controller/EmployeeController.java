@@ -13,11 +13,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Configuration
 @RestController
@@ -35,10 +37,19 @@ public class EmployeeController {
     @Autowired
     JwtService jwtService;
 
+    @Autowired
+    AuthenticationManager authenticationManager;
+
     //This method validates the username & password and then generates the token and return it back
     @PostMapping("/authenticate")
     public String generateToken(@RequestBody AuthRequest authRequest){
-        return jwtService.generateToken(authRequest.getUserName());
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword()));
+        if (authentication.isAuthenticated()) {
+            return jwtService.generateToken(authRequest.getUserName());
+        } else {
+            throw new UsernameNotFoundException("invalid user request !");
+        }
     }
 
     @GetMapping(path = "/employee/{id}")

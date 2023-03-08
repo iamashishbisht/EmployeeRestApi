@@ -1,11 +1,15 @@
 package com.ashish.pack.Service;
 
+import com.ashish.pack.Entity.Users;
 import com.ashish.pack.Exception.EmployeeNotFoundException;
 import com.ashish.pack.Entity.EmployeeEntity;
 import com.ashish.pack.Model.Employee;
 import com.ashish.pack.Repository.EmployeeRepository;
+import com.ashish.pack.Repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +21,12 @@ public class EmployeeService {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     EmployeeEntity employeeEntity;
@@ -50,5 +60,10 @@ public class EmployeeService {
     public List<EmployeeEntity> getEmployeeAllEpmolyee(String name) {
         log.info("Employee Service -> "+ name);
         return employeeRepository.findByName(name);
+    }
+
+    public Users addUser(Users users) {
+        users.setPassword(passwordEncoder.encode(users.getPassword()));
+        return userRepository.saveAndFlush(users);
     }
 }

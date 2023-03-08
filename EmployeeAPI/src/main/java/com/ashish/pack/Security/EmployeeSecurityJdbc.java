@@ -1,3 +1,4 @@
+/*
 package com.ashish.pack.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,8 @@ public class EmployeeSecurityJdbc {
                         + "where email = ?");
     }
 
- /*   @Bean
+ */
+/*   @Bean
     public UserDetailsService userDetailsService(BCryptPasswordEncoder bCryptPasswordEncoder){
         InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
 
@@ -53,9 +55,11 @@ public class EmployeeSecurityJdbc {
                 .build());
 
         return inMemoryUserDetailsManager;
-    }*/
+    }*//*
 
-  /*  @Bean
+
+  */
+/*  @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http,
                                                        BCryptPasswordEncoder bCryptPasswordEncoder,
                                                        UserDetailsService userDetailsService) throws Exception {
@@ -65,7 +69,8 @@ public class EmployeeSecurityJdbc {
                 .passwordEncoder(bCryptPasswordEncoder)
                 .and()
                 .build();
-    }*/
+    }*//*
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -90,3 +95,4 @@ public class EmployeeSecurityJdbc {
     }
 
 }
+*/

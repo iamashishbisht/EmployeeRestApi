@@ -1,5 +1,6 @@
 package com.ashish.pack.Controller;
 
+import com.ashish.pack.Entity.Users;
 import com.ashish.pack.Exception.EmployeeNotFoundException;
 import com.ashish.pack.Entity.EmployeeEntity;
 import com.ashish.pack.Model.Employee;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -47,6 +49,7 @@ public class EmployeeController {
         return employeeService.saveEmployee(employee);
     }
 
+//    @PreAuthorize("haAuthority('ADMIN')")
     @GetMapping(path = "/employee/rp", produces = {MediaType.APPLICATION_XML_VALUE
                                                   ,MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(value = HttpStatus.OK)
@@ -61,5 +64,10 @@ public class EmployeeController {
         String environmentDetails = "port : "+ port + "\n"+ "message : "+ message;
         log.info("environmentDetails -> "+ environmentDetails);
         return environmentDetails;
+    }
+
+    @PostMapping("/addUser")
+    public Users addUser(@RequestBody Users users){
+        return employeeService.addUser(users);
     }
 }

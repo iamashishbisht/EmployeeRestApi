@@ -1,6 +1,18 @@
+For Branch basic-authentication2 ---->
 
+create table Users (id integer NOT NULL AUTO_INCREMENT,
+name varchar(255),
+password varchar(255),
+role varchar(255),
+primary key (id));
 
-create table employee (id integer not null, 
+select * from Users;
+
+INSERT INTO Users (id, name,  password, role) values ('Ashish',1, 'IT');
+
+***************************************************************************************************
+
+create table employee (id integer not null AUTO_INCREMENT,
 department_name varchar(255), 
 name varchar(255), 
 primary key (id));
